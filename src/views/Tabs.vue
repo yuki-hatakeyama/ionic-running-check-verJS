@@ -18,32 +18,42 @@
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
-    <p>{{computedCheck()}}</p>
+    <!-- <p>{{computedCheck()}}</p> -->
+    <p>コンポジションAPI{{ strongMessage }}</p>
   </ion-page>
 </template>
 
 <script>
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage } from '@ionic/vue';
+import { defineComponent, computed } from "vue";
 import { ellipse, square, triangle } from 'ionicons/icons';
 
-export default {
+export default defineComponent({
   name: 'Tabs',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage },
-  computed: {
-    computedCheck() {
-      // firebase情報
-      return function () {
-        console.log("Tabs で computedCheck");
-        return true;
-      };
-    },
-  },
+  // computed: {
+  //   computedCheck() {
+  //     // firebase情報
+  //     return function () {
+  //       console.log("Tabs で computedCheck");
+  //       return true;
+  //     };
+  //   },
+  // },
   setup() {
+    const states = true;
+    const strongMessage = computed(() => {
+      console.log("Tabs で computedCheck");
+      return states;
+    });
+
     return {
       ellipse, 
       square, 
       triangle,
+      states,
+      strongMessage,
     }
   }
-}
+});
 </script>
