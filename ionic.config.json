@@ -1,0 +1,7 @@
+{
+  "name": "ionic-running-check-verJS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
