@@ -19,16 +19,31 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,onIonViewDidEnter,
-onIonViewWillEnter,onIonViewWillLeave,
-onIonViewDidLeave  } from '@ionic/vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  onIonViewDidEnter,
+  onIonViewWillEnter,
+  onIonViewWillLeave,
+  onIonViewDidLeave,
+} from "@ionic/vue";
 import { defineComponent, computed, reactive } from "vue";
 
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import ExploreContainer from "@/components/ExploreContainer.vue";
 
-export default  defineComponent({
-  name: 'Tab3',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+export default defineComponent({
+  name: "Tab3",
+  components: {
+    ExploreContainer,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonPage,
+  },
   // computed: {
   //   computedCheck() {
   //     // firebase情報

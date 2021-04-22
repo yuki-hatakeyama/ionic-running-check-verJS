@@ -12,9 +12,14 @@
 </template>
 
 <script>
-import { IonContent, IonPage, onIonViewDidEnter,
-onIonViewWillEnter,onIonViewWillLeave,
-onIonViewDidLeave } from "@ionic/vue";
+import {
+  IonContent,
+  IonPage,
+  onIonViewDidEnter,
+  onIonViewWillEnter,
+  onIonViewWillLeave,
+  onIonViewDidLeave,
+} from "@ionic/vue";
 
 import { defineComponent, computed, reactive } from "vue";
 

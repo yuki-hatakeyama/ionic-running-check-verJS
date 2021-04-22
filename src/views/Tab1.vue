@@ -14,30 +14,54 @@
 
       <h1 ref="getHtmlElemntRef">タイトルが入ります</h1>
 
+      <!-- <template v-if="isTextType">
+        <p>Aのテキストが入ります</p>
+      </template>
+      <template v-else>
+        <p>Bのテキストが入ります</p>
+      </template>
+
+      <button @click="isTextType = !isTextType">テキストの種類を変更します</button> -->
+
       <p>コンポジションAPI</p>
       <p>reactive => {{ strongMessage }}</p>
-      <p>ref => {{stateRef}}</p>
+      <p>ref => {{ stateRef }}</p>
 
-      
       <button @click="onChange()">リアクティブな値を変更します</button>
 
-      <p @click="$router.push('/about')">About > </p>
+      <p @click="$router.push('/about')">About ></p>
       <ExploreContainer name="Tab 1 page" />
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,onIonViewDidEnter,
-onIonViewWillEnter,onIonViewWillLeave,
-onIonViewDidLeave } from '@ionic/vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  onIonViewDidEnter,
+  onIonViewWillEnter,
+  onIonViewWillLeave,
+  onIonViewDidLeave,
+} from "@ionic/vue";
 import { defineComponent, computed, reactive, watch, ref } from "vue";
 
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import ExploreContainer from "@/components/ExploreContainer.vue";
+// import { useStore } from "vuex";
 
-export default  defineComponent({
-  name: 'Tab1',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+export default defineComponent({
+  name: "Tab1",
+  components: {
+    ExploreContainer,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonPage,
+  },
   setup() {
     console.log("setup");
 
@@ -45,7 +69,7 @@ export default  defineComponent({
     const state = reactive({ isBoolean: true }); // Objectのみ代入できます。
     let stateRef = ref("値が入ります"); // Objectも代入できます。
     let getHtmlElemntRef = ref("値が入ります"); // htmlにrefで指定した場合、object HTMLHeadingElementになる。ここの値は消えるため何でもOK。ただ、null指定をよく見かける。
-
+    // let isTextType = ref(true);
 
     // computedで値の変換をリアルタイムに反映させる場合 → 変数のreactive化が必須。
     // ※ 変数がreactiveならcomputedを使わなくても、リアルタイムに反映はできる。
@@ -61,21 +85,28 @@ export default  defineComponent({
       console.log("nextValu", nextValu);
       console.log("prevValu", prevValu);
     });
-    
+
     // ▼値を絞りたい場合。
     // watch(() => state.isBoolean, (nextValu, prevValu) => {
     //   console.log("nextValu", nextValu);
     //   console.log("prevValu", prevValu);
     // });
-    
 
     // true / false の切り替え
-    const onChange = () =>{
+    const onChange = () => {
       state.isBoolean = !state.isBoolean;
-      // stateRef.value = "初期化"; 
+      stateRef.value = "初期化";
       console.log("stateRef", stateRef);
       console.log("getHtmlElemntRef", getHtmlElemntRef);
-    }
+    };
+
+    // onMounted(() =>{
+    //   console.log("onMounted");
+    // });
+
+    // onUnmounted(() => {
+    //   console.log("onUnmounted");
+    // });
 
     // コンポーネントが表示されるアニメーションがはじまる時に発火します。
     onIonViewWillEnter(() => {
@@ -91,6 +122,7 @@ export default  defineComponent({
 
     // コンポーネントを離脱するアニメーションがはじまる時に発火します。
     onIonViewWillLeave(() => {
+      // onUnmounted(this.setup());
       // console.log('Home page will leave');
     });
 
@@ -104,8 +136,9 @@ export default  defineComponent({
       strongMessage,
       onChange,
       stateRef,
-      getHtmlElemntRef
+      getHtmlElemntRef,
+      // isTextType
     };
   },
-})
+});
 </script>

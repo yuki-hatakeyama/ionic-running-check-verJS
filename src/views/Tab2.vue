@@ -19,25 +19,31 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,onIonViewDidEnter,
-onIonViewWillEnter,onIonViewWillLeave,
-onIonViewDidLeave } from '@ionic/vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  onIonViewDidEnter,
+  onIonViewWillEnter,
+  onIonViewWillLeave,
+  onIonViewDidLeave,
+} from "@ionic/vue";
 import { defineComponent, computed, reactive } from "vue";
 
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import ExploreContainer from "@/components/ExploreContainer.vue";
 
-export default  defineComponent({
-  name: 'Tab2',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
-  // computed: {
-  //   computedCheck() {
-  //     // firebase情報
-  //     return function () {
-  //       console.log("Tab2 の computed");
-  //       return true;
-  //     };
-  //   },
-  // },
+export default defineComponent({
+  name: "Tab2",
+  components: {
+    ExploreContainer,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonPage,
+  },
   setup() {
     const state = reactive({ isBoolean: true });
     const strongMessage = computed(() => {
