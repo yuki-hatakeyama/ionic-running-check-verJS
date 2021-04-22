@@ -18,6 +18,7 @@
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
+    <p>{{computedCheck()}}</p>
   </ion-page>
 </template>
 
@@ -28,6 +29,15 @@ import { ellipse, square, triangle } from 'ionicons/icons';
 export default {
   name: 'Tabs',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage },
+  computed: {
+    computedCheck() {
+      // firebase情報
+      return function () {
+        console.log("Tabs で computedCheck");
+        return true;
+      };
+    },
+  },
   setup() {
     return {
       ellipse, 

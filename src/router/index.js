@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 // import { RouteRecordRaw } from 'vue-router';
 import Tabs from '../views/Tabs.vue'
+import About from "@/views/About.vue"
 
 const routes  = [
   {
@@ -28,7 +29,12 @@ const routes  = [
         component: () => import('@/views/Tab3.vue')
       }
     ]
-  }
+  },
+  {
+    path: '/about/',
+    component: About,
+    name: About,
+  },
 ]
 
 const router = createRouter({

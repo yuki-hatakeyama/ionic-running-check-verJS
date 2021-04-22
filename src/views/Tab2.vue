@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 2</ion-title>
+        <ion-title>Tab 2:JS</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -11,6 +11,7 @@
           <ion-title size="large">Tab 2</ion-title>
         </ion-toolbar>
       </ion-header>
+      <p>{{computedCheck()}}</p>
       
       <ExploreContainer name="Tab 2 page" />
     </ion-content>
@@ -23,6 +24,15 @@ import ExploreContainer from '@/components/ExploreContainer.vue';
 
 export default  {
   name: 'Tab2',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+  computed: {
+    computedCheck() {
+      // firebase情報
+      return function () {
+        console.log("Tab2 で computedCheck");
+        return true;
+      };
+    },
+  },
 }
 </script>
