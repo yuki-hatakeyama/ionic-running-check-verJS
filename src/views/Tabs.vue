@@ -35,7 +35,7 @@ export default defineComponent({
   //   computedCheck() {
   //     // firebase情報
   //     return function () {
-  //       console.log("Tabs で computedCheck");
+  //       console.log("Tabs の computed");
   //       return true;
   //     };
   //   },
@@ -43,7 +43,7 @@ export default defineComponent({
   setup() {
     const testState = true;
     const strongMessage = computed(() => {
-      console.log("Tabs で computedCheck");
+      console.log("Tabs の computed");
       return testState;
     });
 
