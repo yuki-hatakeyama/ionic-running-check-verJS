@@ -41,17 +41,17 @@ export default defineComponent({
   //   },
   // },
   setup() {
-    const states = true;
+    const testState = true;
     const strongMessage = computed(() => {
       console.log("Tabs で computedCheck");
-      return states;
+      return testState;
     });
 
     return {
       ellipse, 
       square, 
       triangle,
-      states,
+      testState,
       strongMessage,
     }
   }
