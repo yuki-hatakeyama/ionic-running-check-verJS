@@ -13,6 +13,7 @@
       </ion-header>
       <!-- <p>{{computedCheck()}}</p> -->
       <p>コンポジションAPI{{ strongMessage }}</p>
+      <button @click="onChange()">値変更：：：{{ strongMessage }}</button>
       <p @click="$router.push('/about')">About > </p>
       <ExploreContainer name="Tab 1 page" />
     </ion-content>
@@ -40,11 +41,17 @@ export default  defineComponent({
   //   },
   // },
   setup() {
+    console.log("setup");
     const state = reactive({ isBoolean: true });
+
     const strongMessage = computed(() => {
       console.log("Tab1 で computedCheck");
       return state.isBoolean;
     });
+
+    const onChange = () =>{
+      state.isBoolean = !state.isBoolean;
+    }
 
     // コンポーネントが表示されるアニメーションがはじまる時に発火します。
     onIonViewWillEnter(() => {
@@ -71,6 +78,7 @@ export default  defineComponent({
     return {
       state,
       strongMessage,
+      onChange
     };
   },
 })
