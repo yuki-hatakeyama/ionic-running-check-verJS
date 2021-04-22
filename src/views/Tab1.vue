@@ -11,10 +11,16 @@
           <ion-title size="large">Tab 1</ion-title>
         </ion-toolbar>
       </ion-header>
-      <!-- <p>{{computedCheck()}}</p> -->
-      <p>コンポジションAPI{{ strongMessage }}</p>
-      <p>ref:::{{stateRef}}</p>
-      <button @click="onChange()">値変更：：：{{ strongMessage }}</button>
+
+      <h1 ref="getHtmlElemntRef">タイトルが入ります</h1>
+
+      <p>コンポジションAPI</p>
+      <p>reactive => {{ strongMessage }}</p>
+      <p>ref => {{stateRef}}</p>
+
+      
+      <button @click="onChange()">リアクティブな値を変更します</button>
+
       <p @click="$router.push('/about')">About > </p>
       <ExploreContainer name="Tab 1 page" />
     </ion-content>
@@ -34,8 +40,11 @@ export default  defineComponent({
   components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
   setup() {
     console.log("setup");
+
+    // state も stateRef はほぼ同じで、リアクティブな変数。
     const state = reactive({ isBoolean: true }); // Objectのみ代入できます。
     let stateRef = ref("値が入ります"); // Objectも代入できます。
+    let getHtmlElemntRef = ref("値が入ります"); // htmlにrefで指定した場合、object HTMLHeadingElementになる。ここの値は消えるため何でもOK。ただ、null指定をよく見かける。
 
 
     // computedで値の変換をリアルタイムに反映させる場合 → 変数のreactive化が必須。
@@ -63,7 +72,9 @@ export default  defineComponent({
     // true / false の切り替え
     const onChange = () =>{
       state.isBoolean = !state.isBoolean;
-      stateRef.value = "初期化"; 
+      // stateRef.value = "初期化"; 
+      console.log("stateRef", stateRef);
+      console.log("getHtmlElemntRef", getHtmlElemntRef);
     }
 
     // コンポーネントが表示されるアニメーションがはじまる時に発火します。
@@ -92,7 +103,8 @@ export default  defineComponent({
       state,
       strongMessage,
       onChange,
-      stateRef
+      stateRef,
+      getHtmlElemntRef
     };
   },
 })
