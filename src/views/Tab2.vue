@@ -13,6 +13,7 @@
       </ion-header>
       <!-- <p>{{computedCheck()}}</p> -->
       <p>コンポジションAPI{{ strongMessage }}</p>
+      <p @click="onCommit()">コミットさせます</p>
       <ExploreContainer name="Tab 2 page" />
     </ion-content>
   </ion-page>
@@ -31,6 +32,7 @@ import {
   onIonViewDidLeave,
 } from "@ionic/vue";
 import { defineComponent, computed, reactive } from "vue";
+import { useStore } from "vuex";
 
 import ExploreContainer from "@/components/ExploreContainer.vue";
 
@@ -45,11 +47,34 @@ export default defineComponent({
     IonPage,
   },
   setup() {
+    const store = useStore();
+    const user = {
+      uid: "Bの値が入ります",
+    };
+
+    // mutation を呼び出す場合
+    const authStateChanged = () => {
+      store.commit("onAuthStateChanged", user);
+    };
+
+    const onCommit = () => {
+      console.log("コミットします");
+      authStateChanged();
+    };
+
     const state = reactive({ isBoolean: true });
     const strongMessage = computed(() => {
       console.log("Tab2 の computed");
       return state.isBoolean;
     });
+
+    // onAuthStateChanged();
+
+    // const // getters を呼び出す場合
+    // const userInfo = computed(() => {
+    //   console.log("ユーザー情報を取得", store.getters.user);
+    //   return store.getters.user;
+    // });
 
     // コンポーネントが表示されるアニメーションがはじまる時に発火します。
     onIonViewWillEnter(() => {
@@ -76,6 +101,7 @@ export default defineComponent({
     return {
       state,
       strongMessage,
+      onCommit,
     };
   },
 });

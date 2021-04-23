@@ -13,7 +13,7 @@
       </ion-header>
 
       <h1 ref="getHtmlElemntRef">タイトルが入ります</h1>
-
+      <p>ユーザー情報：：{{ userInfo.uid }}</p>
       <!-- <template v-if="isTextType">
         <p>Aのテキストが入ります</p>
       </template>
@@ -50,7 +50,7 @@ import {
 import { defineComponent, computed, reactive, watch, ref } from "vue";
 
 import ExploreContainer from "@/components/ExploreContainer.vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "Tab1",
@@ -64,6 +64,25 @@ export default defineComponent({
   },
   setup() {
     console.log("setup");
+    const store = useStore();
+
+    const user = {
+      uid: "Aの値が入ります",
+    };
+
+    // await this.$store.commit("onAuthStateChanged", user);
+    // mutation を呼び出す場合
+    const authStateChanged = () => {
+      console.log("tab1 で コミット");
+      store.commit("onAuthStateChanged", user);
+    };
+    authStateChanged();
+
+    // getters を呼び出す場合
+    const userInfo = computed(() => {
+      console.log("tab1 で ユーザー情報を取得", store.getters.user);
+      return store.getters.user;
+    });
 
     // state も stateRef はほぼ同じで、リアクティブな変数。
     const state = reactive({ isBoolean: true }); // Objectのみ代入できます。
@@ -138,6 +157,7 @@ export default defineComponent({
       stateRef,
       getHtmlElemntRef,
       // isTextType
+      userInfo,
     };
   },
 });

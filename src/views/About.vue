@@ -4,7 +4,7 @@
       <div id="container">
         <p>アバウトページ</p>
         <!-- <p>{{computedCheck()}}</p> -->
-        <p>コンポジションAPI{{ strongMessage }}</p>
+        <p>メニュー情報{{ menuComputed }}</p>
         <p @click="$router.push('/tabs/tab1')">タブ１に戻る</p>
       </div>
     </ion-content>
@@ -40,13 +40,23 @@ export default defineComponent({
   // },
   setup() {
     const state = reactive({ isBoolean: true });
+
     const strongMessage = computed(() => {
       console.log("About の computed");
       return state.isBoolean;
     });
 
+    let menu = {
+      name: "プレーン",
+    };
+
+    const menuComputed = computed(() => {
+      return menu;
+    });
+
     // コンポーネントが表示されるアニメーションがはじまる時に発火します。
     onIonViewWillEnter(() => {
+      menu.name = "チョコ";
       // state.isBoolean = false;
       // console.log('Home page will enter', state);
     });
@@ -70,6 +80,7 @@ export default defineComponent({
     return {
       state,
       strongMessage,
+      menuComputed,
     };
   },
 });

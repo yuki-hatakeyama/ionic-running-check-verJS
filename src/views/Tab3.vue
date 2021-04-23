@@ -12,7 +12,8 @@
         </ion-toolbar>
       </ion-header>
       <!-- <p>{{computedCheck()}}</p> -->
-      <p>コンポジションAPI{{ strongMessage }}</p>
+      <p>コンポジションAPI{{ strongMessage?.value }}</p>
+      <button @click="onChange()">リアクティブな値を変更します</button>
       <ExploreContainer name="Tab 3 page" />
     </ion-content>
   </ion-page>
@@ -30,8 +31,8 @@ import {
   onIonViewWillLeave,
   onIonViewDidLeave,
 } from "@ionic/vue";
-import { defineComponent, computed, reactive } from "vue";
-
+import { defineComponent, computed, reactive, watch, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import ExploreContainer from "@/components/ExploreContainer.vue";
 
 export default defineComponent({
@@ -44,28 +45,40 @@ export default defineComponent({
     IonContent,
     IonPage,
   },
-  // computed: {
-  //   computedCheck() {
-  //     // firebase情報
-  //     return function () {
-  //       console.log("Tab3 の computed");
-  //       return true;
-  //     };
-  //   },
-  // },
   setup() {
     const state = reactive({ isBoolean: true });
-    const strongMessage = computed(() => {
-      console.log("Tab3 の computed");
-      return state.isBoolean;
-    });
+    let strongMessage = ref(null);
+
+    const router = useRouter();
+    const route = useRoute();
+
+    console.log("router", router);
+    console.log("route", route);
+
+    let stopWatch = "";
+
+    // true / false の切り替え
+    const onChange = () => {
+      state.isBoolean = !state.isBoolean;
+    };
 
     // コンポーネントが表示されるアニメーションがはじまる時に発火します。
     onIonViewWillEnter(() => {
-      // state.isBoolean = false;
-      // console.log('Home page will enter', state);
-    });
+      stopWatch = watch(route, (nextValu, prevValu) => {
+        console.log("nextValu", nextValu.path);
+        console.log("prevValu", prevValu.path);
+      });
 
+      strongMessage.value = computed(() => {
+        console.log("onIonViewWillEnter内の の computed");
+        return state.isBoolean;
+      });
+    });
+    // コンポーネントを離脱するアニメーションがはじまる時に発火します。
+    onIonViewWillLeave(() => {
+      // stopWatch();
+      // console.log('Home page will leave');
+    });
     // コンポーネントが表示されるアニメーションが終了した時に発火します。
     onIonViewDidEnter(() => {
       // state.isBoolean = false;
@@ -74,6 +87,7 @@ export default defineComponent({
 
     // コンポーネントを離脱するアニメーションがはじまる時に発火します。
     onIonViewWillLeave(() => {
+      stopWatch();
       // console.log('Home page will leave');
     });
 
@@ -85,6 +99,7 @@ export default defineComponent({
     return {
       state,
       strongMessage,
+      onChange,
     };
   },
 });
